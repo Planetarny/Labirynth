@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right*x+transform.forward*z;
+        move += Vector3.down;
         characterController.Move(move*speed*Time.deltaTime);
 
     }
