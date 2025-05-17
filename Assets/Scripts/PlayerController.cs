@@ -9,45 +9,52 @@ public class PlayerController : MonoBehaviour
 
     public Transform groundCheck;
     public LayerMask groundMask;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
     }
+
     private void Update()
     {
         PlayerMove();
     }
-    void PlayerMove()
-    {
 
+    private void PlayerMove()
+    {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         RaycastHit hit;
-        if (Physics.Raycast(groundCheck.position, transform.TransformDirection(Vector3.down),out hit,1f,groundMask)) 
+        if(Physics.Raycast(groundCheck.position, 
+            transform.TransformDirection(Vector3.down), 
+            out hit, 0.4f, groundMask))
         {
-
             string terrainType = hit.collider.gameObject.tag;
             switch (terrainType)
             {
-
-                case "fast":
-                    speed = 6f;
+                case "Fast":
+                    speed = 20f;
                     break;
-                case "slow":
-                    speed = 1.5f;
+                case "Slow":
+                    speed = 5f;
                     break;
                 default:
-                    speed = 3f;
-                    break ;
+                    speed = 10f;
+                    break;
             }
-
         }
 
-
-        Vector3 move = transform.right*x+transform.forward*z;
+        Vector3 move = transform.right * x + transform.forward * z;
         move += Vector3.down;
-        characterController.Move(move*speed*Time.deltaTime);
+        characterController.Move(move * speed * Time.deltaTime *GameManager.gameManager.speedModifier);
+    }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag=="Pickup")
+        {
+            hit.gameObject.GetComponent<Pickup>().Picked();
+        }
     }
 }

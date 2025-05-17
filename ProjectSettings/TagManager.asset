@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - fast
-  - slow
+  - Fast
+  - Slow
+  - Pickup
   layers:
   - Default
   - TransparentFX
