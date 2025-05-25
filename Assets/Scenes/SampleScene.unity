@@ -412,7 +412,7 @@ PrefabInstance:
     - target: {fileID: 2213648806768401414, guid: e85becbada19b2d4090fa466343c417b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d41ef50605f8af94cb7e4e66149b6ee5, type: 2}
+      objectReference: {fileID: 2100000, guid: 9acd18bae040ef641b462f089e3f60fb, type: 2}
     - target: {fileID: 2213648808464519715, guid: e85becbada19b2d4090fa466343c417b, type: 3}
       propertyPath: m_TargetTexture
       value: 
@@ -2314,7 +2314,7 @@ PrefabInstance:
     - target: {fileID: 2213648806768401414, guid: e85becbada19b2d4090fa466343c417b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d41ef50605f8af94cb7e4e66149b6ee5, type: 2}
+      objectReference: {fileID: 2100000, guid: 9acd18bae040ef641b462f089e3f60fb, type: 2}
     - target: {fileID: 2213648808464519715, guid: e85becbada19b2d4090fa466343c417b, type: 3}
       propertyPath: m_TargetTexture
       value: 
