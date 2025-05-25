@@ -8,7 +8,7 @@ public class PortalCamera : MonoBehaviour
     public Transform portal;
     public Transform otherPortal;
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         PortalCameraController();
     }
