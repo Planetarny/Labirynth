@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
     public int points;
     public float speedModifier;
 
-    public int redKey;
-    public int greenKey;
-    public int blueKey;
+    public int[] redKeys={0,0,0,0 };
+    public int[] greenKeys= { 0, 0, 0, 0 };
+    public int[] blueKeys= { 0, 0, 0, 0 };
+    public int[] goldKeys= { 0, 0, 0, 0 };
 
     bool gamePaused = false;
     bool win = false;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameManager == null) gameManager = this;
         InvokeRepeating(nameof(Stopper), 1f, 1f);
+        points = PlayerPrefs.GetInt("CoinNum");
     }
 
     private void ResetSpeed()
@@ -47,13 +49,15 @@ public class GameManager : MonoBehaviour
     public void AddPoints(int point)
     {
         points += point;
+        PlayerPrefs.SetInt("CoinNum", points);
     }    
 
-    public void AddKey(KeyColor color)
+    public void AddKey(KeyColor color, KeyType type)
     {
-        if (color==KeyColor.Red) redKey++;
-        else if (color==KeyColor.Green) greenKey++;
-        else blueKey++;
+        if (color==KeyColor.Red) redKeys[(int)type]++;
+        else if (color==KeyColor.Green) greenKeys[(int)type]++;
+        else if (color==KeyColor.Gold) goldKeys[(int)type]++;
+        else blueKeys[(int)type]++;
     }
 
     void Stopper()
