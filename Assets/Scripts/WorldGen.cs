@@ -43,8 +43,5 @@ public class WorldGen : MonoBehaviour
         }
 
     }
-    private void Start()
-    {
-        GenerateLabirynth();
-    }
+    
 }
