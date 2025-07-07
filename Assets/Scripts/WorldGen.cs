@@ -7,6 +7,8 @@ public class WorldGen : MonoBehaviour
     public Texture2D pixelmap;
     public ColorToPref[] colorMap;
     public float offset = 10f;
+    public Material mainmat;
+    public Material extramat;
 
     void GenerateTile(int x, int z)
     {
@@ -41,7 +43,35 @@ public class WorldGen : MonoBehaviour
             }
 
         }
+        ColorWalls();
 
     }
     
+    public void ColorWalls()
+    {
+
+        foreach (Transform child in transform)
+        {
+
+            if (child.tag == "wall")
+            {
+
+                if (Random.Range(0,3)==0)
+                {
+
+                    child.gameObject.GetComponent<Renderer>().material = extramat;
+
+                }
+                else
+                {
+
+                    child.gameObject.GetComponent<Renderer>().material = mainmat;
+
+                }
+
+            }
+
+        }
+
+    }
 }
