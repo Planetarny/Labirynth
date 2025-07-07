@@ -25,22 +25,26 @@ public class WorldGen : MonoBehaviour
             }
 
         }
-        
+
     }
     public void GenerateLabirynth()
     {
 
-        for (int x = 0; x < pixelmap.width; x++) 
+        for (int x = 0; x < pixelmap.width; x++)
         {
 
-            for (int z = 0; z < pixelmap.height; z++) 
+            for (int z = 0; z < pixelmap.height; z++)
             {
 
-                GenerateTile(x,z);
+                GenerateTile(x, z);
 
             }
 
         }
 
+    }
+    private void Start()
+    {
+        GenerateLabirynth();
     }
 }
