@@ -17,11 +17,20 @@ public class GameManager : MonoBehaviour
     bool gamePaused = false;
     bool win = false;
 
+    AudioSource sound;
+
+    public AudioClip resume;
+    public AudioClip pause;
+    public AudioClip winClip;
+    public AudioClip lose;
+    public AudioClip ambient;
+
     private void Start()
     {
         if (gameManager == null) gameManager = this;
         InvokeRepeating(nameof(Stopper), 1f, 1f);
         points = PlayerPrefs.GetInt("CoinNum");
+        sound = GetComponent<AudioSource>();
     }
 
     private void ResetSpeed()
@@ -77,10 +86,12 @@ public class GameManager : MonoBehaviour
         if (win)
         {
             Debug.Log("You Win!!! Reload?");
+            PlayMusic(winClip);
         }
         else 
         {
             Debug.Log("You Lose!!! Reload?");
+            PlayMusic(lose);
         }
     }
 
@@ -105,6 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        PlayMusic(pause);
         Debug.Log("Game Paused");
         gamePaused = true;
         Time.timeScale = 0f;
@@ -113,7 +125,16 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         Debug.Log("Game Resumed");
+        PlayMusic(resume);
         gamePaused = false;
         Time.timeScale = 1f;
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+
+        sound.clip = clip;
+        sound.Play();
+
     }
 }
