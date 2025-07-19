@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
     public int[] goldKeys= { 0, 0, 0, 0 };
 
     bool gamePaused = false;
-    bool win = false;
+    public bool win = false;
+    int bestTime;
 
     AudioSource sound;
 
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour
             PauseTxt.text = "You Lost!";
             PauseInfo.text = "Press Space to play again";
         }
+        //if (timeToEnd)
     }
 
     private void ReloadScene()
@@ -178,5 +180,14 @@ public class GameManager : MonoBehaviour
         sound.clip = clip;
         sound.Play();
 
+    }
+    public void RefreshKeys()
+    {
+
+        int totalBlue = blueKeys[0]+ blueKeys[1]+ blueKeys[2]+ blueKeys[3];
+        int totalGold = goldKeys[0]+ goldKeys[1]+ goldKeys[2]+ goldKeys[3];
+        int totalGreen = greenKeys[0]+ greenKeys[1]+ greenKeys[2]+ greenKeys[3];
+        int totalRed = redKeys[0]+ redKeys[1]+ redKeys[2]+ redKeys[3];
+        
     }
 }
