@@ -1,9 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
+
+    public Text TimeTxt;
+    public Text BlueKeys;
+    public Text RedKeys;
+    public Text GoldKeys;
+    public Text GreenKeys;
+    public Text Coins;
+    public Image Freeze;
+    public GameObject Pickup;
+    public GameObject Pause;
+    public GameObject Info;
 
     public int timeToEnd;
     public int points;
