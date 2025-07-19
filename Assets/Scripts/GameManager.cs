@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public Text GoldKeys;
     public Text GreenKeys;
     public Text Coins;
+    public Text InfoTxt;
+    public Text PauseTxt;
+    public Text PauseInfo;
     public Image Freeze;
     public GameObject Pickup;
     public GameObject Pause;
@@ -44,6 +47,18 @@ public class GameManager : MonoBehaviour
         InvokeRepeating(nameof(Stopper), 1f, 1f);
         points = PlayerPrefs.GetInt("CoinNum");
         sound = GetComponent<AudioSource>();
+
+        Info.SetActive(false);
+        Pause.SetActive(false);
+        Pickup.SetActive(true);
+        TimeTxt.text = timeToEnd.ToString();
+        InfoTxt.text = null;
+        BlueKeys.text = "0";
+        RedKeys.text = "0";
+        GreenKeys.text = "0";
+        GoldKeys.text = "0";
+        Coins.text = points.ToString();
+
     }
 
     private void ResetSpeed()
@@ -65,6 +80,7 @@ public class GameManager : MonoBehaviour
     public void FreezeTime(int freeze)
     {
         CancelInvoke(nameof(Stopper));
+        Freeze.enabled = true;
         InvokeRepeating(nameof(Stopper), freeze, 1f);
     }
 
@@ -85,6 +101,7 @@ public class GameManager : MonoBehaviour
     void Stopper()
     {
         timeToEnd--;
+        Freeze.enabled = false;
         Debug.Log($"Time: {timeToEnd} s");
         if (timeToEnd<=0)
         {
@@ -95,16 +112,22 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         CancelInvoke(nameof(Stopper));
-        //Time.timeScale=0f;
+        Time.timeScale=0f;
         if (win)
         {
             Debug.Log("You Win!!! Reload?");
             PlayMusic(winClip);
+            Pause.SetActive(true);
+            PauseTxt.text = "You Won!";
+            PauseInfo.text = "Press Space to play again";
         }
         else 
         {
             Debug.Log("You Lose!!! Reload?");
             PlayMusic(lose);
+            Pause.SetActive(true);
+            PauseTxt.text = "You Lost!";
+            PauseInfo.text = "Press Space to play again";
         }
     }
 
@@ -116,6 +139,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        TimeTxt.text = timeToEnd.ToString();
         if (Input.GetKeyDown(KeyCode.Escape))
             PauseCheck();
         ReloadScene();
@@ -133,6 +157,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Paused");
         gamePaused = true;
         Time.timeScale = 0f;
+        Pause.SetActive (true);
+        PauseTxt.text = "Game Paused";
+        PauseInfo.text = "Press ESC to continue";
+
     }
 
     public void ResumeGame()
@@ -141,6 +169,7 @@ public class GameManager : MonoBehaviour
         PlayMusic(resume);
         gamePaused = false;
         Time.timeScale = 1f;
+        Pause.SetActive(false);
     }
 
     public void PlayMusic(AudioClip clip)
